@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Jalal - Social Links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ============================================
+           NRT Font & Base Styles
+           ============================================ */
+        @font-face {
+            font-family: 'NRT';
+            src: url('https://cdn.jsdelivr.net/gh/nawafalqari/nrt-font/NRT-Reg.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/nawafalqari/nrt-font/NRT-Reg.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            font-family: 'NRT', 'Noto Sans Arabic', 'Tahoma', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            direction: rtl;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* ============================================
+           Kurdistan Flag SVG Style
+           ============================================ */
+        .kurdistan-flag {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .kurdistan-flag svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* ============================================
+           Language Switcher Dropdown
+           ============================================ */
+        .lang-switcher {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+        }
+
+        .lang-switcher-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .lang-switcher-btn {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.1);
+                color: #d1d5db;
+            }
+            .lang-switcher-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .lang-switcher-btn {
+                background: rgba(0, 0, 0, 0.05);
+                border-color: rgba(0, 0, 0, 0.1);
+                color: #4b5563;
+            }
+            .lang-switcher-btn:hover {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .lang-switcher-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            min-width: 200px;
+            padding: 0.5rem;
+            border-radius: 1rem;
+            border: 1px solid;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 20;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .lang-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .lang-dropdown {
+                background: rgba(17, 17, 24, 0.95);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .lang-dropdown {
+                background: rgba(255, 255, 255, 0.95);
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: right;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .lang-option {
+                color: #d1d5db;
+            }
+            .lang-option:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+            .lang-option.active {
+                background: rgba(59, 130, 246, 0.2);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .lang-option {
+                color: #374151;
+            }
+            .lang-option:hover {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            .lang-option.active {
+                background: rgba(59, 130, 246, 0.1);
+            }
+        }
+
+        .lang-option-content {
+            flex: 1;
+        }
+
+        .lang-option-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: block;
+        }
+
+        .lang-option-native {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .lang-option-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #3b82f6;
+            color: white;
+        }
+
+        .lang-option:not(.active) .lang-option-check {
+            display: none;
+        }
+
+        /* ============================================
+           Dark/Light Mode - Auto System Only
+           ============================================ */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0a0a0f;
+            }
+            .card {
+                background: rgba(17, 17, 24, 0.8);
+                border-color: rgba(255, 255, 255, 0.08);
+            }
+            .name { color: #ffffff; }
+            .bio { color: #9ca3af; }
+            .btn {
+                background: rgba(255, 255, 255, 0.05);
+                color: #d1d5db;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            .btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #ffffff;
+            }
+            .social-link.facebook {
+                background: linear-gradient(90deg, rgba(24, 119, 242, 0.2), rgba(24, 119, 242, 0.1));
+                border-color: rgba(24, 119, 242, 0.3);
+            }
+            .social-link.facebook:hover {
+                border-color: rgba(24, 119, 242, 0.5);
+            }
+            .social-link.telegram {
+                background: linear-gradient(90deg, rgba(0, 136, 204, 0.2), rgba(0, 136, 204, 0.1));
+                border-color: rgba(0, 136, 204, 0.3);
+            }
+            .social-link.telegram:hover {
+                border-color: rgba(0, 136, 204, 0.5);
+            }
+            .app-card {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            .app-card:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+            .app-name { color: #d1d5db; }
+            .social-name.facebook { color: #60a5fa; }
+            .social-name.telegram { color: #22d3ee; }
+            .social-desc { color: #6b7280; }
+            .social-arrow { color: #6b7280; }
+            .apps-title { color: #9ca3af; }
+            .footer-text { color: #4b5563; }
+            .orb-1 { background: rgba(37, 99, 235, 0.08); }
+            .orb-2 { background: rgba(147, 51, 234, 0.08); }
+            .orb-3 { background: rgba(6, 182, 212, 0.05); }
+            .profile-glow { background: rgba(59, 130, 246, 0.2); }
+            .online-status { border-color: #111118; }
+            .profile-image { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05); }
+            .card-glow {
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.2), rgba(6, 182, 212, 0.2));
+            }
+            .apps-section { border-color: rgba(255, 255, 255, 0.05); }
+            .footer { border-color: rgba(255, 255, 255, 0.05); }
+            .toast {
+                background: rgba(17, 17, 24, 0.95);
+                color: #ffffff;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ec 100%);
+            }
+            .card {
+                background: rgba(255, 255, 255, 0.8);
+                border-color: rgba(0, 0, 0, 0.05);
+            }
+            .name { color: #111827; }
+            .bio { color: #6b7280; }
+            .btn {
+                background: rgba(0, 0, 0, 0.05);
+                color: #4b5563;
+                border-color: rgba(0, 0, 0, 0.05);
+            }
+            .btn:hover {
+                background: rgba(0, 0, 0, 0.1);
+                color: #111827;
+            }
+            .social-link.facebook {
+                background: linear-gradient(90deg, rgba(24, 119, 242, 0.1), rgba(24, 119, 242, 0.05));
+                border-color: rgba(24, 119, 242, 0.2);
+            }
+            .social-link.facebook:hover {
+                border-color: rgba(24, 119, 242, 0.4);
+            }
+            .social-link.telegram {
+                background: linear-gradient(90deg, rgba(0, 136, 204, 0.1), rgba(0, 136, 204, 0.05));
+                border-color: rgba(0, 136, 204, 0.2);
+            }
+            .social-link.telegram:hover {
+                border-color: rgba(0, 136, 204, 0.4);
+            }
+            .app-card {
+                background: rgba(0, 0, 0, 0.05);
+                border-color: rgba(0, 0, 0, 0.05);
+            }
+            .app-card:hover {
+                background: rgba(0, 0, 0, 0.1);
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+            .app-name { color: #374151; }
+            .social-name.facebook { color: #2563eb; }
+            .social-name.telegram { color: #0891b2; }
+            .social-desc { color: #9ca3af; }
+            .social-arrow { color: #9ca3af; }
+            .apps-title { color: #6b7280; }
+            .footer-text { color: #9ca3af; }
+            .orb-1 { background: rgba(37, 99, 235, 0.15); }
+            .orb-2 { background: rgba(147, 51, 234, 0.15); }
+            .orb-3 { background: rgba(6, 182, 212, 0.1); }
+            .profile-glow { background: rgba(59, 130, 246, 0.3); }
+            .online-status { border-color: #ffffff; }
+            .profile-image { box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05); }
+            .card-glow {
+                background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(147, 51, 234, 0.15), rgba(6, 182, 212, 0.15));
+            }
+            .apps-section { border-color: rgba(0, 0, 0, 0.05); }
+            .footer { border-color: rgba(0, 0, 0, 0.05); }
+            .toast {
+                background: rgba(255, 255, 255, 0.95);
+                color: #111827;
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* ============================================
+           Animated Background Orbs
+           ============================================ */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-scale 12s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            33% {
+                transform: translate(30px, -30px);
+            }
+            66% {
+                transform: translate(-20px, 20px);
+            }
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        /* ============================================
+           Main Card Container
+           ============================================ */
+        .card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            z-index: 10;
+            animation: slide-up 0.8s ease-out;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-glow {
+            position: absolute;
+            inset: -4px;
+            border-radius: 2.5rem;
+            filter: blur(20px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid;
+            transition: all 0.5s ease;
+        }
+
+        /* ============================================
+           Profile Section
+           ============================================ */
+        .profile-section {
+            padding: 2.5rem 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+        }
+
+        .profile-glow {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            filter: blur(12px);
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        .profile-image {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .online-status {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #22c55e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .online-ping {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* ============================================
+           Typography
+           ============================================ */
+        .name {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+            transition: color 0.5s ease;
+        }
+
+        .code-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.25rem;
+            font-family: 'Fira Code', monospace;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .code-icon {
+            width: 16px;
+            height: 16px;
+            color: #3b82f6;
+        }
+
+        .code-text {
+            font-size: 0.875rem;
+            color: #3b82f6;
+        }
+
+        .bio {
+            font-size: 0.875rem;
+            line-height: 1.625;
+            margin-bottom: 1.5rem;
+            max-width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: color 0.5s ease;
+        }
+
+        /* ============================================
+           Action Buttons
+           ============================================ */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-icon.success {
+            color: #22c55e;
+        }
+
+        /* ============================================
+           Social Links
+           ============================================ */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid;
+        }
+
+        .social-link:hover {
+            transform: scale(1.02);
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.1);
+        }
+
+        .social-icon.facebook {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .social-icon.telegram {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-info {
+            flex: 1;
+            text-align: right;
+        }
+
+        .social-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            display: block;
+            transition: color 0.5s ease;
+        }
+
+        .social-desc {
+            font-size: 0.75rem;
+            transition: color 0.5s ease;
+        }
+
+        .social-arrow {
+            width: 20px;
+            height: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link.facebook:hover .social-arrow {
+            color: #60a5fa;
+        }
+
+        .social-link.telegram:hover .social-arrow {
+            color: #22d3ee;
+        }
+
+        /* ============================================
+           Apps Section
+           ============================================ */
+        .apps-section {
+            padding-top: 1.5rem;
+            border-top: 1px solid;
+            transition: border-color 0.5s ease;
+        }
+
+        .apps-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .apps-header svg {
+            width: 16px;
+            height: 16px;
+            transition: color 0.5s ease;
+        }
+
+        .apps-title {
+            font-size: 0.875rem;
+            transition: color 0.5s ease;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .app-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid;
+        }
+
+        .app-card:hover {
+            transform: scale(1.05);
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.1);
+        }
+
+        .app-icon.app-1 {
+            background: linear-gradient(135deg, #fb923c, #ef4444);
+            box-shadow: 0 10px 20px rgba(251, 146, 60, 0.3);
+        }
+
+        .app-icon.app-2 {
+            background: linear-gradient(135deg, #f472b6, #9333ea);
+            box-shadow: 0 10px 20px rgba(244, 114, 182, 0.3);
+        }
+
+        .app-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .app-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.5s ease;
+        }
+
+        /* ============================================
+           Footer
+           ============================================ */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid;
+            text-align: center;
+            transition: border-color 0.5s ease;
+        }
+
+        .footer-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            transition: color 0.5s ease;
+        }
+
+        .heart {
+            width: 12px;
+            height: 12px;
+            color: #ef4444;
+            fill: #ef4444;
+        }
+
+        /* ============================================
+           Toast Notification
+           ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ============================================
+           Responsive
+           ============================================ */
+        @media (max-width: 480px) {
+            .card-wrapper {
+                max-width: 100%;
+            }
+            
+            .profile-section {
+                padding: 2rem 1.5rem 1.25rem;
+            }
+            
+            .name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card-wrapper" id="mainCard">
+        <div class="card-glow"></div>
+        <div class="card">
+            <!-- Language Switcher -->
+            <div class="lang-switcher">
+                <button class="lang-switcher-btn" onclick="toggleLangDropdown()">
+                    <i data-lucide="languages"></i>
+                    <span id="currentLangText">سۆرانی</span>
+                    <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <div class="lang-option active" onclick="selectLanguage('ckb')" data-lang="ckb">
+                        <div class="kurdistan-flag">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="100" cy="100" r="35" fill="#ffcc00"/>
+                                <g stroke="#ffcc00" stroke-width="6" stroke-linecap="round">
+                                    <line x1="100" y1="45" x2="100" y2="25"/>
+                                    <line x1="100" y1="155" x2="100" y2="175"/>
+                                    <line x1="45" y1="100" x2="25" y2="100"/>
+                                    <line x1="155" y1="100" x2="175" y2="100"/>
+                                    <line x1="61" y1="61" x2="47" y2="47"/>
+                                    <line x1="139" y1="139" x2="153" y2="153"/>
+                                    <line x1="61" y1="139" x2="47" y2="153"/>
+                                    <line x1="139" y1="61" x2="153" y2="47"/>
+                                    <line x1="71" y1="38" x2="62" y2="20"/>
+                                    <line x1="129" y1="162" x2="138" y2="180"/>
+                                    <line x1="38" y1="71" x2="20" y2="62"/>
+                                    <line x1="162" y1="129" x2="180" y2="138"/>
+                                    <line x1="38" y1="129" x2="20" y2="138"/>
+                                    <line x1="162" y1="71" x2="180" y2="62"/>
+                                    <line x1="71" y1="162" x2="62" y2="180"/>
+                                    <line x1="129" y1="38" x2="138" y2="20"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="lang-option-content">
+                            <span class="lang-option-name">کوردی سۆرانی</span>
+                            <span class="lang-option-native">Kurdish Sorani</span>
+                        </div>
+                        <div class="lang-option-check">
+                            <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                        </div>
+                    </div>
+                    <div class="lang-option" onclick="selectLanguage('kmr')" data-lang="kmr">
+                        <div class="kurdistan-flag">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="100" cy="100" r="35" fill="#ffcc00"/>
+                                <g stroke="#ffcc00" stroke-width="6" stroke-linecap="round">
+                                    <line x1="100" y1="45" x2="100" y2="25"/>
+                                    <line x1="100" y1="155" x2="100" y2="175"/>
+                                    <line x1="45" y1="100" x2="25" y2="100"/>
+                                    <line x1="155" y1="100" x2="175" y2="100"/>
+                                    <line x1="61" y1="61" x2="47" y2="47"/>
+                                    <line x1="139" y1="139" x2="153" y2="153"/>
+                                    <line x1="61" y1="139" x2="47" y2="153"/>
+                                    <line x1="139" y1="61" x2="153" y2="47"/>
+                                    <line x1="71" y1="38" x2="62" y2="20"/>
+                                    <line x1="129" y1="162" x2="138" y2="180"/>
+                                    <line x1="38" y1="71" x2="20" y2="62"/>
+                                    <line x1="162" y1="129" x2="180" y2="138"/>
+                                    <line x1="38" y1="129" x2="20" y2="138"/>
+                                    <line x1="162" y1="71" x2="180" y2="62"/>
+                                    <line x1="71" y1="162" x2="62" y2="180"/>
+                                    <line x1="129" y1="38" x2="138" y2="20"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="lang-option-content">
+                            <span class="lang-option-name">کوردی بادینی</span>
+                            <span class="lang-option-native">Kurdish Badini</span>
+                        </div>
+                        <div class="lang-option-check">
+                            <i data-lucide="check" style="width: 12px; height: 12px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <!-- Profile Image -->
+                <div class="profile-image-wrapper">
+                    <div class="profile-glow"></div>
+                    <div class="profile-image">
+                        <img src="profile.png" alt="Ahmad Jalal">
+                    </div>
+                    <div class="online-status">
+                        <div class="online-ping"></div>
+                    </div>
+                </div>
+
+                <!-- Name -->
+                <h1 class="name">Ahmad Jalal</h1>
+
+                <!-- Code Tag -->
+                <div class="code-tag">
+                    <i data-lucide="code" class="code-icon"></i>
+                    <span class="code-text">Code is life.!</span>
+                    <i data-lucide="code" class="code-icon"></i>
+                </div>
+
+                <!-- Bio -->
+                <p class="bio" id="bioText">بەخێربێن بۆ پەیجی تایبەتی من! فۆڵۆوم بکە بۆ زانیاری زیاتر.</p>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn" onclick="copyLink()">
+                        <i data-lucide="copy" class="btn-icon copy-icon"></i>
+                        <i data-lucide="check" class="btn-icon check-icon" style="display: none;"></i>
+                        <span class="btn-text" id="copyText">کۆپی</span>
+                    </button>
+                    <button class="btn" onclick="sharePage()">
+                        <i data-lucide="share-2" class="btn-icon"></i>
+                        <span id="shareText">بڵاوکردنەوە</span>
+                    </button>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-links">
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/1E943qU1j6/" target="_blank" rel="noopener noreferrer" class="social-link facebook">
+                        <div class="social-icon facebook">
+                            <i data-lucide="facebook"></i>
+                        </div>
+                        <div class="social-info">
+                            <span class="social-name facebook" id="facebookText">فەیسبووک</span>
+                            <span class="social-desc" id="facebookDesc">فۆڵۆوم بکە لە فەیسبووک</span>
+                        </div>
+                        <i data-lucide="external-link" class="social-arrow"></i>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer" class="social-link telegram">
+                        <div class="social-icon telegram">
+                            <i data-lucide="send"></i>
+                        </div>
+                        <div class="social-info">
+                            <span class="social-name telegram" id="telegramText">تێلێگرام</span>
+                            <span class="social-desc" id="telegramDesc">فۆڵۆوم بکە لە تێلێگرام</span>
+                        </div>
+                        <i data-lucide="external-link" class="social-arrow"></i>
+                    </a>
+                </div>
+
+                <!-- Apps Section -->
+                <div class="apps-section">
+                    <div class="apps-header">
+                        <i data-lucide="globe"></i>
+                        <span class="apps-title" id="appsTitle">ئەپەکانم</span>
+                    </div>
+                    <div class="apps-grid">
+                        <a href="#" class="app-card">
+                            <div class="app-icon app-1">
+                                <i data-lucide="globe"></i>
+                            </div>
+                            <span class="app-name" id="app1Text">ئەپی یەکەم</span>
+                        </a>
+                        <a href="#" class="app-card">
+                            <div class="app-icon app-2">
+                                <i data-lucide="globe"></i>
+                            </div>
+                            <span class="app-name" id="app2Text">ئەپی دووەم</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <p class="footer-text">
+                        <span id="footerText">دروستکراوە بە</span> <i data-lucide="heart" class="heart"></i> <span id="footerBy">لەلایەن Ahmad Jalal</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">لینک کۆپی کرا!</div>
+
+    <script>
+        // ============================================
+        // Language Data
+        // ============================================
+        const translations = {
+            ckb: {
+                bio: 'بەخێربێن بۆ پەیجی تایبەتی من! فۆڵۆوم بکە بۆ زانیاری زیاتر.',
+                copy: 'کۆپی',
+                copied: 'کۆپی کرا',
+                share: 'بڵاوکردنەوە',
+                shared: 'بە سەرکەوتوویی بڵاوکرایەوە!',
+                facebook: 'فەیسبووک',
+                facebookDesc: 'فۆڵۆوم بکە لە فەیسبووک',
+                telegram: 'تێلێگرام',
+                telegramDesc: 'فۆڵۆوم بکە لە تێلێگرام',
+                appsTitle: 'ئەپەکانم',
+                app1: 'ئەپی یەکەم',
+                app2: 'ئەپی دووەم',
+                footer: 'دروستکراوە بە',
+                footerBy: 'لەلایەن Ahmad Jalal',
+                linkCopied: 'لینک کۆپی کرا!',
+                currentLang: 'سۆرانی'
+            },
+            kmr: {
+                bio: 'Bi xêr hatî pelê min ê taybet! Ji bo agahdariya zêdetir min bişopîne.',
+                copy: 'Kopî',
+                copied: 'Kopî bû',
+                share: 'Parve bike',
+                shared: 'Bi serkeftî hate parvekirin!',
+                facebook: 'Facebook',
+                facebookDesc: 'Min li Facebookê bişopîne',
+                telegram: 'Telegram',
+                telegramDesc: 'Min li Telegramê bişopîne',
+                appsTitle: 'Sepanên min',
+                app1: 'Sepana yekem',
+                app2: 'Sepana duyem',
+                footer: 'Hatiye çêkirin bi',
+                footerBy: 'ji aliyê Ahmad Jalal',
+                linkCopied: 'Lînk kopî bû!',
+                currentLang: 'Badini'
+            }
+        };
+
+        let currentLang = 'ckb';
+
+        // ============================================
+        // Initialize
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // Check saved language
+            const savedLang = localStorage.getItem('selectedLanguage');
+            if (savedLang) {
+                currentLang = savedLang;
+                updateContent();
+                updateLangUI();
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                const langSwitcher = document.querySelector('.lang-switcher');
+                if (!langSwitcher.contains(e.target)) {
+                    document.getElementById('langDropdown').classList.remove('show');
+                }
+            });
+        });
+
+        // ============================================
+        // Language Switcher
+        // ============================================
+        function toggleLangDropdown() {
+            document.getElementById('langDropdown').classList.toggle('show');
+        }
+
+        function selectLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('selectedLanguage', lang);
+            
+            updateContent();
+            updateLangUI();
+            
+            // Close dropdown
+            document.getElementById('langDropdown').classList.remove('show');
+            
+            // Refresh icons
+            lucide.createIcons();
+        }
+
+        function updateLangUI() {
+            // Update active state
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${currentLang}"]`).classList.add('active');
+            
+            // Update button text
+            document.getElementById('currentLangText').textContent = translations[currentLang].currentLang;
+        }
+
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            document.getElementById('bioText').textContent = t.bio;
+            document.getElementById('copyText').textContent = t.copy;
+            document.getElementById('shareText').textContent = t.share;
+            document.getElementById('facebookText').textContent = t.facebook;
+            document.getElementById('facebookDesc').textContent = t.facebookDesc;
+            document.getElementById('telegramText').textContent = t.telegram;
+            document.getElementById('telegramDesc').textContent = t.telegramDesc;
+            document.getElementById('appsTitle').textContent = t.appsTitle;
+            document.getElementById('app1Text').textContent = t.app1;
+            document.getElementById('app2Text').textContent = t.app2;
+            document.getElementById('footerText').textContent = t.footer;
+            document.getElementById('footerBy').textContent = t.footerBy;
+        }
+
+        // ============================================
+        // Copy Link
+        // ============================================
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            showToast(translations[currentLang].linkCopied);
+            
+            // Change icon temporarily
+            const copyIcon = document.querySelector('.copy-icon');
+            const checkIcon = document.querySelector('.check-icon');
+            const btnText = document.querySelector('.btn-text');
+            
+            copyIcon.style.display = 'none';
+            checkIcon.style.display = 'block';
+            btnText.textContent = translations[currentLang].copied;
+            
+            setTimeout(() => {
+                copyIcon.style.display = 'block';
+                checkIcon.style.display = 'none';
+                btnText.textContent = translations[currentLang].copy;
+            }, 2000);
+        }
+
+        // ============================================
+        // Share Page
+        // ============================================
+        async function sharePage() {
+            const shareData = {
+                title: 'Ahmad Jalal',
+                text: 'Code is life.! </>',
+                url: window.location.href,
+            };
+
+            // Try native share first
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    showToast(translations[currentLang].shared);
+                    return;
+                } catch (err) {
+                    console.log('Native share failed:', err);
+                }
+            }
+
+            // Fallback: Copy to clipboard
+            copyLink();
+        }
+
+        // ============================================
+        // Show Toast
+        // ============================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
