@@ -865,7 +865,7 @@
             <div class="lang-switcher">
                 <button class="lang-switcher-btn" onclick="toggleLangDropdown()">
                     <i data-lucide="languages"></i>
-                    <span id="currentLangText">سۆرانی</span>
+                    <span id="currentLangText">کوردی سۆرانی</span>
                     <i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>
                 </button>
                 <div class="lang-dropdown" id="langDropdown">
@@ -1070,21 +1070,26 @@
         }
 
         // Update page language
-        function updateLanguage(lang) {
-            const t = translations[lang];
-            document.getElementById('bioText').textContent = t.bio;
-            document.getElementById('copyText').textContent = t.copy;
-            document.getElementById('shareText').textContent = t.share;
-            document.getElementById('tiktokText').textContent = t.tiktok;
-            document.getElementById('tiktokDesc').textContent = t.tiktokDesc;
-            document.getElementById('telegramText').textContent = t.telegram;
-            document.getElementById('telegramDesc').textContent = t.telegramDesc;
-            document.getElementById('appsTitle').textContent = t.appsTitle;
-            document.getElementById('whatsappText').textContent = t.whatsapp;
-            document.getElementById('telegramAppText').textContent = t.telegramApp;
-            document.getElementById('madeWith').textContent = t.madeWith;
-            document.getElementById('currentLangText').textContent = t.currentLang;
-        }
+        // Update page language
+function updateLanguage(lang) {
+    const t = translations[lang];
+    document.getElementById('bioText').textContent = t.bio;
+    document.getElementById('copyText').textContent = t.copy;
+    document.getElementById('shareText').textContent = t.share;
+    document.getElementById('tiktokText').textContent = t.tiktok;
+    document.getElementById('tiktokDesc').textContent = t.tiktokDesc;
+    document.getElementById('telegramText').textContent = t.telegram;
+    document.getElementById('telegramDesc').textContent = t.telegramDesc;
+
+    // --- لێرە دایبنێ ---
+    document.getElementById('appsTitle').textContent = t.appsTitle;
+    document.getElementById('whatsappText').textContent = t.whatsapp;
+    document.getElementById('telegramAppText').textContent = t.telegramApp;
+    // -----------------
+
+    document.getElementById('madeWith').textContent = t.madeWith;
+    document.getElementById('currentLangText').textContent = t.currentLang;
+}
 
         // Copy link functionality
         function copyLink() {
